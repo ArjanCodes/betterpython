@@ -1,9 +1,10 @@
 class LightBulb:
-    def turnOn(self):
+    def turn_on(self):
         print("LightBulb: turned on...")
 
-    def turnOff(self):
+    def turn_off(self):
         print("LightBulb: turned off...")
+
 
 class ElectricPowerSwitch:
 
@@ -13,11 +14,12 @@ class ElectricPowerSwitch:
 
     def press(self):
         if self.on:
-            self.lightBulb.turnOff()
+            self.lightBulb.turn_off()
             self.on = False
         else:
-            self.lightBulb.turnOn()
+            self.lightBulb.turn_on()
             self.on = True
+
 
 l = LightBulb()
 switch = ElectricPowerSwitch(l)

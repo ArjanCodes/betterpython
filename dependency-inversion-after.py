@@ -1,27 +1,31 @@
 from abc import ABC, abstractmethod
 
+
 class Switchable(ABC):
     @abstractmethod
-    def turnOn(self):
+    def turn_on(self):
         pass
 
     @abstractmethod
-    def turnOff(self):
+    def turn_off(self):
         pass
 
+
 class LightBulb(Switchable):
-    def turnOn(self):
+    def turn_on(self):
         print("LightBulb: turned on...")
 
-    def turnOff(self):
+    def turn_off(self):
         print("LightBulb: turned off...")
 
+
 class Fan(Switchable):
-    def turnOn(self):
+    def turn_on(self):
         print("Fan: turned on...")
 
-    def turnOff(self):
+    def turn_off(self):
         print("Fan: turned off...")
+
 
 class ElectricPowerSwitch:
 
@@ -31,11 +35,12 @@ class ElectricPowerSwitch:
 
     def press(self):
         if self.on:
-            self.client.turnOff()
+            self.client.turn_off()
             self.on = False
         else:
-            self.client.turnOn()
+            self.client.turn_on()
             self.on = True
+
 
 l = LightBulb()
 f = Fan()
