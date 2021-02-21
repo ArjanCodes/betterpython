@@ -11,7 +11,7 @@ class Application:
         print(f"Connecting to Crypto exchange...")
 
     def get_market_data(self, coin: str) -> List[float]:
-        return [10, 25, 5, 20]
+        return [10, 12, 18, 14]
 
     def list_average(self, l: List[float]) -> float:
         return sum(l) / len(l)
@@ -29,7 +29,8 @@ class Application:
             return prices[-1] > self.list_average(prices)
 
     def check_prices(self, coin: str):
-        prices = self.get_market_data("BTC/USD")
+        self.connect()
+        prices = self.get_market_data(coin)
         should_buy = self.should_buy(prices)
         should_sell = self.should_sell(prices)
         if should_buy:
@@ -40,5 +41,4 @@ class Application:
             print(f"No action needed for {coin}.")
 
 application = Application("average")
-application.connect()
 application.check_prices("BTC/USD")
