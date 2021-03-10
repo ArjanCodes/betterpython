@@ -20,17 +20,20 @@ class UUIDGen():
         self.clear_button = tk.Button(self.frame, text="Clear list", command=self.handle_click_clear_list)
         self.clear_button.pack()
 
+        # initialize the uuid list
+        self.uuid = []
+
         # start the loop
         self.root.mainloop()
 
     def handle_click_generate_uuid(self):
         # generate a uuid and add it to the list
-        self.uuid = uuid.uuid4()
-        self.list.insert(tk.END, self.uuid)
+        self.uuid.append(uuid.uuid4())
+        self.list.insert(tk.END, self.uuid[-1])
 
     def handle_click_clear_list(self):
-        # clear the latest stored uuid and delete it from the list
-        self.uuid = ""
+        # clear the uuid list and delete it from the list
+        self.uuid = []
         self.list.delete(0, tk.END)
 
 # start the application

@@ -2,14 +2,22 @@ import tkinter as tk
 import uuid
 from abc import ABC, abstractmethod
 
+# functional strategy 
+def generate_uuid1():
+    return uuid.uuid1()
+
+def generate_uuid4():
+    return uuid.uuid4()
+
 class Model:
     def __init__(self):
         self.uuid = []
 
 class Controller:
-    def __init__(self, model, view):
+    def __init__(self, model, view, generate_uuid):
         self.model = model
         self.view = view
+        self.generate_uuid = generate_uuid
     
     def start(self):
         self.view.setup(self)
@@ -17,7 +25,7 @@ class Controller:
 
     def handle_click_generate_uuid(self):
         # generate a uuid and add it to the list
-        self.model.uuid.append(uuid.uuid4())
+        self.model.uuid.append(self.generate_uuid())
         self.view.append_to_list(self.model.uuid[-1])
 
     def handle_click_clear_list(self):
@@ -73,5 +81,5 @@ class TkView(View):
         self.root.mainloop()
 
 # create the MVC & start the application
-c = Controller(Model(), TkView())
+c = Controller(Model(), TkView(), generate_uuid4)
 c.start()
