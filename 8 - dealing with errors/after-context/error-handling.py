@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, abort
-import sqlite3
-from db import fetch_blogs, fetch_blog, NotFoundError
+from db import fetch_blogs, fetch_blog, NotFoundError, NotAuthorizedError
 
 app = Flask(__name__)
 
@@ -18,3 +17,5 @@ def get_blog(id):
         return jsonify(fetch_blog(id))
     except NotFoundError:
         abort(404, description="Resource not found")
+    except NotAuthorizedError:
+        abort(403, description="Access denied")
