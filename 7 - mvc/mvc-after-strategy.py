@@ -1,5 +1,7 @@
 import tkinter as tk
 import uuid
+import string
+import random
 from abc import ABC, abstractmethod
 
 # functional strategy 
@@ -8,6 +10,9 @@ def generate_uuid1():
 
 def generate_uuid4():
     return uuid.uuid4()
+
+def generate_simple_id():
+    return ''.join(random.choices(string.ascii_lowercase, k=30))
 
 class Model:
     def __init__(self):
@@ -81,5 +86,5 @@ class TkView(View):
         self.root.mainloop()
 
 # create the MVC & start the application
-c = Controller(Model(), TkView(), generate_uuid4)
+c = Controller(Model(), TkView(), generate_simple_id)
 c.start()
