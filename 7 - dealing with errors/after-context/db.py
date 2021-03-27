@@ -43,7 +43,7 @@ def fetch_blog(id: str):
         with SQLite('application.db') as cur:
 
             # execute the query and fetch the data
-            cur.execute(f"SELECT * FROM blogs where id='{id}'")
+            cur.execute(f"SELECT * FROM blogs where id=?", [id])
             result = cur.fetchone()
 
             # return the result or raise an error
