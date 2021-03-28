@@ -36,10 +36,6 @@ class ReusablePool:
         self.in_use.remove(r)
         self.free.append(r)
 
-    def set_size(self, size: int):
-        self.size = size
-
-
 # Create reusable pool
 pool= ReusablePool(2)
 

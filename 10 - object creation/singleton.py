@@ -12,8 +12,13 @@ class Logger(metaclass=Singleton):
     def log(self, msg):
         print(msg)
 
-logger = Logger()
-logger2 = Logger()
+class CustomLogger(Logger):
+    def __init__(self):
+        print("Creating Custom logger")
+        super().__init__()
+
+logger = CustomLogger()
+logger2 = CustomLogger()
 print(logger)
 print(logger2)
 logger.log("Hello")
