@@ -5,12 +5,13 @@ from returns.pointfree import bind
 
 class SQLite():
     def __init__(self, file='application.db'):
-        self.file=file
+        self.file = file
+        self.conn = None
     def __enter__(self):
         self.conn = sqlite3.connect(self.file)
         return self.conn.cursor()
     def __exit__(self, type, value, traceback):
-        self.conn.close()
+        if self.conn: self.conn.close()
     
 class NotFoundError(Exception):
     pass
