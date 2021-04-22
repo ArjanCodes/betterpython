@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 
 class Order:
-    items = []
-    quantities = []
-    prices = []
-    status = "open"
+
+    def __init__(self):
+        self.items = []
+        self.quantities = []
+        self.prices = []
+        self.status = "open"
 
     def add_item(self, name, quantity, price):
         self.items.append(name)
@@ -19,7 +21,8 @@ class Order:
 
 class SMSAuthorizer:
 
-    authorized = False
+    def __init__(self):
+        self.authorized = False
 
     def verify_code(self, code):
         print(f"Verifying SMS code {code}")

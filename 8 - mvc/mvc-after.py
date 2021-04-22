@@ -6,6 +6,12 @@ class Model:
     def __init__(self):
         self.uuid = []
 
+    def append(self, item):
+        self.uuid.append(item)
+
+    def clear(self):
+        self.uuid = []
+
 class Controller:
     def __init__(self, model, view):
         self.model = model
@@ -17,12 +23,13 @@ class Controller:
 
     def handle_click_generate_uuid(self):
         # generate a uuid and add it to the list
-        self.model.uuid.append(uuid.uuid4())
-        self.view.append_to_list(self.model.uuid[-1])
+        newid = uuid.uuid4()
+        self.model.append(newid)
+        self.view.append_to_list(newid)
 
     def handle_click_clear_list(self):
         # clear the uuid list in the model and the view
-        self.model.uuid = []
+        self.model.clear()
         self.view.clear_list()
 
 class View(ABC):

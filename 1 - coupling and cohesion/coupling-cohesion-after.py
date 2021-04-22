@@ -2,10 +2,7 @@ import string
 import random
 
 class VehicleInfo:
-    brand: str
-    electric: bool
-    catalogue_price: int
-
+    
     def __init__(self, brand, electric, catalogue_price):
         self.brand = brand
         self.electric = electric
@@ -22,9 +19,6 @@ class VehicleInfo:
         print(f"Payable tax: {self.compute_tax()}")
 
 class Vehicle:
-    id: str
-    license_plate: str
-    info: VehicleInfo
 
     def __init__(self, id, license_plate, info):
         self.id = id
@@ -39,18 +33,15 @@ class Vehicle:
 
 class VehicleRegistry:
 
-    vehicle_info = { }
-
-    def add_vehicle_info(self, brand, electric, catalogue_price):
-        self.vehicle_info[brand] = VehicleInfo(brand, electric, catalogue_price)
-
-
     def __init__(self):
+        self.vehicle_info = { }
         self.add_vehicle_info("Tesla Model 3", True, 60000)
         self.add_vehicle_info("Volkswagen ID3", True, 35000)
         self.add_vehicle_info("BMW 5", False, 45000)
         self.add_vehicle_info("Tesla Model Y", True, 75000)
 
+    def add_vehicle_info(self, brand, electric, catalogue_price):
+        self.vehicle_info[brand] = VehicleInfo(brand, electric, catalogue_price)
 
     def generate_vehicle_id(self, length):
         return ''.join(random.choices(string.ascii_uppercase, k=length))

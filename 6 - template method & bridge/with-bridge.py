@@ -25,7 +25,6 @@ class Coinbase(Exchange):
         return [10, 12, 18, 20]
 
 
-
 class TradingBot(ABC):
 
     def __init__(self, exchange: Exchange):

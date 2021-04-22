@@ -2,8 +2,6 @@ from typing import List
 
 class Application:
 
-    trading_strategy: str
-
     def __init__(self, trading_strategy = "average"):
         self.trading_strategy = trading_strategy
 

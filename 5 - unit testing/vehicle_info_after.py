@@ -1,7 +1,4 @@
 class VehicleInfo:
-    brand: str
-    electric: bool
-    catalogue_price: int
 
     def __init__(self, brand, electric, catalogue_price):
         self.brand = brand

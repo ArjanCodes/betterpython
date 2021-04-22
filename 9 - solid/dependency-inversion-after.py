@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 
 class Order:
-    items = []
-    quantities = []
-    prices = []
-    status = "open"
+
+    def __init__(self):
+        self.items = []
+        self.quantities = []
+        self.prices = []
+        self.status = "open"
 
     def add_item(self, name, quantity, price):
         self.items.append(name)
@@ -25,7 +27,8 @@ class Authorizer(ABC):
 
 class Authorizer_SMS(Authorizer):
 
-    authorized = False
+    def __init__(self):
+        self.authorized = False
 
     def verify_code(self, code):
         print(f"Verifying SMS code {code}")
@@ -36,7 +39,8 @@ class Authorizer_SMS(Authorizer):
 
 class Authorizer_Google(Authorizer):
 
-    authorized = False
+    def __init__(self):
+        self.authorized = False
 
     def verify_code(self, code):
         print(f"Verifying Google auth code {code}")
@@ -47,7 +51,8 @@ class Authorizer_Google(Authorizer):
 
 class Authorizer_Robot(Authorizer):
 
-    authorized = False
+    def __init__(self):
+        self.authorized = False
 
     def not_a_robot(self):
         self.authorized = True

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 
 class TradingBot(ABC):
+    
     def connect(self):
         print(f"Connecting to Crypto exchange...")
 
@@ -29,6 +30,7 @@ class TradingBot(ABC):
         pass
 
 class AverageTrader(TradingBot):
+
     def list_average(self, l: List[float]) -> float:
         return sum(l) / len(l)
 
