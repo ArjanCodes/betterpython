@@ -10,9 +10,6 @@ def generate_id(length=8):
 
 
 class SupportTicket:
-    id: str
-    customer: str
-    issue: str
 
     def __init__(self, customer, issue):
         self.id = generate_id()
@@ -52,10 +49,8 @@ class BlackHoleStrategy(TicketOrderingStrategy):
 
 class CustomerSupport:
 
-    tickets: List[SupportTicket] = []
-    processing_strategy: TicketOrderingStrategy = None
-
     def __init__(self, processing_strategy: TicketOrderingStrategy):
+        self.tickets = []
         self.processing_strategy = processing_strategy
 
     def create_ticket(self, customer, issue):

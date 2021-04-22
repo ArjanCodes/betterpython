@@ -10,9 +10,6 @@ def generate_id(length=8):
 
 
 class SupportTicket:
-    id: str
-    customer: str
-    issue: str
 
     def __init__(self, customer, issue):
         self.id = generate_id()
@@ -42,7 +39,8 @@ def blackHoleOrdering(list: List[SupportTicket]) -> List[SupportTicket]:
 
 class CustomerSupport:
 
-    tickets: List[SupportTicket] = []
+    def __init__(self):
+        self.tickets = []
 
     def create_ticket(self, customer, issue):
         self.tickets.append(SupportTicket(customer, issue))

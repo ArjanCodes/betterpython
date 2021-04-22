@@ -9,9 +9,6 @@ def generate_id(length=8):
 
 
 class SupportTicket:
-    id: str
-    customer: str
-    issue: str
 
     def __init__(self, customer, issue):
         self.id = generate_id()
@@ -20,9 +17,6 @@ class SupportTicket:
 
 
 class CustomerSupport:
-
-    tickets: List[SupportTicket]
-    processing_strategy: str
 
     def __init__(self, processing_strategy: str = "fifo"):
         self.tickets = []
