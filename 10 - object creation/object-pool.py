@@ -6,13 +6,10 @@ class Reusable:
 
 class ReusablePool:
 
-    free: List[Reusable]
-    in_use: List[Reusable]
-
     def __init__(self, size):
         self.size = size
-        self.free = []
-        self.in_use = []
+        self.free: List[Reusable] = []
+        self.in_use: List[Reusable] = []
         for _ in range(0, size):
             self.free.append(Reusable())
 
