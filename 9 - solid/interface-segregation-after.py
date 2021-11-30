@@ -28,7 +28,7 @@ class PaymentProcessor(ABC):
         pass
 
 
-class PaymentProcessor_SMS(PaymentProcessor):
+class PaymentProcessorSMS(PaymentProcessor):
 
     @abstractmethod
     def auth_sms(self, code):
@@ -39,7 +39,7 @@ class PaymentProcessor_SMS(PaymentProcessor):
         pass
 
 
-class DebitPaymentProcessor(PaymentProcessor_SMS):
+class DebitPaymentProcessor(PaymentProcessorSMS):
 
     def __init__(self, security_code):
         self.security_code = security_code
@@ -68,7 +68,7 @@ class CreditPaymentProcessor(PaymentProcessor):
         order.status = "paid"
 
 
-class PaypalPaymentProcessor(PaymentProcessor_SMS):
+class PaypalPaymentProcessor(PaymentProcessorSMS):
 
     def __init__(self, email_address):
         self.email_address = email_address
