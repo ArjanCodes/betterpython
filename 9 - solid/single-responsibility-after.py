@@ -17,6 +17,7 @@ class Order:
             total += self.quantities[i] * self.prices[i]
         return total
 
+
 class PaymentProcessor:
     def pay_debit(self, order, security_code):
         print("Processing debit payment type")
