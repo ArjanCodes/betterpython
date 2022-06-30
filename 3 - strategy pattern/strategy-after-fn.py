@@ -1,7 +1,6 @@
 import string
 import random
 from typing import List, Callable
-from abc import ABC, abstractmethod
 
 
 def generate_id(length=8):
