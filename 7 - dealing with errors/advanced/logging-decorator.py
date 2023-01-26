@@ -9,7 +9,7 @@ def create_logger():
 	logger = logging.getLogger('exc_logger') 
 	logger.setLevel(logging.INFO) 
 	
-	#c reate a file to store all the 
+	# create a file to store all the 
 	# logged exceptions 
 	logfile = logging.FileHandler('exc_logger.log') 
 	
