@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Order:
 
     def __init__(self):
@@ -19,13 +20,14 @@ class Order:
             total += self.quantities[i] * self.prices[i]
         return total
 
+
 class Authorizer(ABC):
     @abstractmethod
     def is_authorized(self) -> bool:
         pass
 
 
-class Authorizer_SMS(Authorizer):
+class AuthorizerSMS(Authorizer):
 
     def __init__(self):
         self.authorized = False
@@ -37,7 +39,8 @@ class Authorizer_SMS(Authorizer):
     def is_authorized(self) -> bool:
         return self.authorized
 
-class Authorizer_Google(Authorizer):
+
+class AuthorizerGoogle(Authorizer):
 
     def __init__(self):
         self.authorized = False
@@ -49,7 +52,8 @@ class Authorizer_Google(Authorizer):
     def is_authorized(self) -> bool:
         return self.authorized
 
-class Authorizer_Robot(Authorizer):
+
+class AuthorizerRobot(Authorizer):
 
     def __init__(self):
         self.authorized = False
@@ -73,13 +77,14 @@ class DebitPaymentProcessor(PaymentProcessor):
     def __init__(self, security_code, authorizer: Authorizer):
         self.security_code = security_code
         self.authorizer = authorizer
-    
+
     def pay(self, order):
         if not self.authorizer.is_authorized():
             raise Exception("Not authorized")
         print("Processing debit payment type")
         print(f"Verifying security code: {self.security_code}")
         order.status = "paid"
+
 
 class CreditPaymentProcessor(PaymentProcessor):
 
@@ -90,6 +95,7 @@ class CreditPaymentProcessor(PaymentProcessor):
         print("Processing credit payment type")
         print(f"Verifying security code: {self.security_code}")
         order.status = "paid"
+
 
 class PaypalPaymentProcessor(PaymentProcessor):
 
@@ -111,7 +117,7 @@ order.add_item("SSD", 1, 150)
 order.add_item("USB cable", 2, 5)
 
 print(order.total_price())
-authorizer = Authorizer_Robot()
+authorizer = AuthorizerRobot()
 # authorizer.verify_code(465839)
 authorizer.not_a_robot()
 processor = PaypalPaymentProcessor("hi@arjancodes.com", authorizer)

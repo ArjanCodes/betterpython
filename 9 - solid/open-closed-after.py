@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Order:
 
     def __init__(self):
@@ -20,18 +21,19 @@ class Order:
         return total
 
 
-
 class PaymentProcessor(ABC):
 
     @abstractmethod
     def pay(self, order, security_code):
         pass
 
+
 class DebitPaymentProcessor(PaymentProcessor):
     def pay(self, order, security_code):
         print("Processing debit payment type")
         print(f"Verifying security code: {security_code}")
         order.status = "paid"
+
 
 class CreditPaymentProcessor(PaymentProcessor):
     def pay(self, order, security_code):

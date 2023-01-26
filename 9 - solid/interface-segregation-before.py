@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Order:
 
     def __init__(self):
@@ -30,6 +31,7 @@ class PaymentProcessor(ABC):
     def pay(self, order):
         pass
 
+
 class DebitPaymentProcessor(PaymentProcessor):
 
     def __init__(self, security_code):
@@ -39,13 +41,14 @@ class DebitPaymentProcessor(PaymentProcessor):
     def auth_sms(self, code):
         print(f"Verifying SMS code {code}")
         self.verified = True
-    
+
     def pay(self, order):
         if not self.verified:
             raise Exception("Not authorized")
         print("Processing debit payment type")
         print(f"Verifying security code: {self.security_code}")
         order.status = "paid"
+
 
 class CreditPaymentProcessor(PaymentProcessor):
 
@@ -59,6 +62,7 @@ class CreditPaymentProcessor(PaymentProcessor):
         print("Processing credit payment type")
         print(f"Verifying security code: {self.security_code}")
         order.status = "paid"
+
 
 class PaypalPaymentProcessor(PaymentProcessor):
 

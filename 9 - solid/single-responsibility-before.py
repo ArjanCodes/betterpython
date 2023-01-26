@@ -29,6 +29,7 @@ class Order:
         else:
             raise Exception(f"Unknown payment type: {payment_type}")
 
+
 order = Order()
 order.add_item("Keyboard", 1, 50)
 order.add_item("SSD", 1, 150)
