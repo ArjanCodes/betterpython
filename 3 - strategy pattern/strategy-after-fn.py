@@ -1,50 +1,55 @@
+from dataclasses import dataclass, field
 import string
 import random
 from typing import List, Callable
 
 
-def generate_id(length=8):
+def generate_id(length: int = 8) -> str:
     # helper function for generating an id
     return ''.join(random.choices(string.ascii_uppercase, k=length))
 
 
+@dataclass
 class SupportTicket:
-
-    def __init__(self, customer, issue):
-        self.id = generate_id()
-        self.customer = customer
-        self.issue = issue
+    id: str = field(init=False, default_factory=generate_id)
+    customer: str
+    issue: str
 
 
-def fifoOrdering(list: List[SupportTicket]) -> List[SupportTicket]:
+SupportTickets = List[SupportTicket]
+
+Ordering = Callable[[SupportTickets], SupportTickets]
+
+
+def fifo_ordering(list: SupportTickets) -> SupportTickets:
     return list.copy()
 
 
-def filoOrdering(list: List[SupportTicket]) -> List[SupportTicket]:
+def filo_ordering(list: SupportTickets) -> SupportTickets:
     list_copy = list.copy()
     list_copy.reverse()
     return list_copy
 
 
-def randomOrdering(list: List[SupportTicket]) -> List[SupportTicket]:
+def random_ordering(list: SupportTickets) -> SupportTickets:
     list_copy = list.copy()
     random.shuffle(list_copy)
     return list_copy
 
 
-def blackHoleOrdering(list: List[SupportTicket]) -> List[SupportTicket]:
+def blackhole_ordering(_: SupportTickets) -> SupportTickets:
     return []
 
 
 class CustomerSupport:
 
     def __init__(self):
-        self.tickets = []
+        self.tickets: SupportTickets = []
 
     def create_ticket(self, customer, issue):
         self.tickets.append(SupportTicket(customer, issue))
 
-    def process_tickets(self, ordering: Callable[[List[SupportTicket]], List[SupportTicket]]):
+    def process_tickets(self, ordering: Ordering):
         # create the ordered list
         ticket_list = ordering(self.tickets)
 
@@ -65,13 +70,20 @@ class CustomerSupport:
         print("==================================")
 
 
-# create the application
-app = CustomerSupport()
+def main() -> None:
+    # create the application
+    app = CustomerSupport()
 
-# register a few tickets
-app.create_ticket("John Smith", "My computer makes strange sounds!")
-app.create_ticket("Linus Sebastian", "I can't upload any videos, please help.")
-app.create_ticket("Arjan Egges", "VSCode doesn't automatically solve my bugs.")
+    # register a few tickets
+    app.create_ticket("John Smith", "My computer makes strange sounds!")
+    app.create_ticket("Linus Sebastian",
+                      "I can't upload any videos, please help.")
+    app.create_ticket(
+        "Arjan Egges", "VSCode doesn't automatically solve my bugs.")
 
-# process the tickets
-app.process_tickets(blackHoleOrdering)
+    # process the tickets
+    app.process_tickets(random_ordering)
+
+
+if __name__ == '__main__':
+    main()
