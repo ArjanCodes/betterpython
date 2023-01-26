@@ -37,7 +37,7 @@ def random_ordering(list: SupportTickets) -> SupportTickets:
     return list_copy
 
 
-def black_hole_ordering(_: SupportTickets) -> SupportTickets:
+def blackhole_ordering(_: SupportTickets) -> SupportTickets:
     return []
 
 
