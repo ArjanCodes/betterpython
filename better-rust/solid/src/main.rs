@@ -1,17 +1,15 @@
-
 fn main() {
-    run_single_responsibility_before();
+    single_responsibility_before();
 
-    run_single_responsibility_after();
+    single_responsibility_after();
 
-    run_open_closed();
+    open_closed();
 
-    run_liskov_substitution();
+    liskov_substitution();
 }
 
-fn run_single_responsibility_before() {
-    println!("running `run_single_responsibility_before`:\n");
-
+#[macros::example]
+fn single_responsibility_before() {
     use solid::single_responsibility_before::*;
 
     let mut order = Order::new();
@@ -22,13 +20,10 @@ fn run_single_responsibility_before() {
 
     println!("{}", order.total_price());
     order.pay("debit", "0372846");
-
-    println!("------------");
 }
 
-fn run_single_responsibility_after() {
-    println!("running `run_single_responsibility_after`:\n");
-
+#[macros::example]
+fn single_responsibility_after() {
     use solid::single_responsibility_after::*;
 
     let mut order = Order::new();
@@ -42,13 +37,10 @@ fn run_single_responsibility_after() {
     let processor = PaymentProcessor {};
 
     processor.pay_debit(&mut order, "0372846");
-
-    println!("------------");
 }
 
-fn run_open_closed() {
-    println!("running `run_open_closed`:\n");
-
+#[macros::example]
+fn open_closed() {
     use solid::open_closed_after::*;
 
     let mut order = Order::new();
@@ -62,13 +54,10 @@ fn run_open_closed() {
     let processor = DebitPaymentProcessor {};
 
     processor.pay(&mut order, "0372846");
-
-    println!("------------");    
 }
 
-fn run_liskov_substitution() {
-    println!("running `run_liskov_substitution`:\n");
-
+#[macros::example]
+fn liskov_substitution() {
     use solid::liskov_substitution_after::*;
 
     let mut order = Order::new();
@@ -82,6 +71,4 @@ fn run_liskov_substitution() {
     let processor = PaypalPaymentProcessor::new("hi@arjancodes.com");
 
     processor.pay(&mut order);
-
-    println!("------------");    
 }
