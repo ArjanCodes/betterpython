@@ -1,3 +1,4 @@
 # misc
 .DS_Store
 *.pyc
+/better-rust/target
