@@ -1,3 +1,5 @@
+use std::cell::RefCell;
+
 fn main() {
     single_responsibility_before();
 
@@ -6,6 +8,10 @@ fn main() {
     open_closed();
 
     liskov_substitution();
+
+    interface_segregation_before();
+
+    interface_segregation_after();
 }
 
 #[macros::example]
@@ -70,5 +76,41 @@ fn liskov_substitution() {
     
     let processor = PaypalPaymentProcessor::new("hi@arjancodes.com");
 
+    processor.pay(&mut order);
+}
+
+#[macros::example]
+fn interface_segregation_before() {
+    use solid::interface_segregation_before::*;
+
+    let mut order = Order::new();
+
+    order.add_item("Keyboard", 1, 50.0);
+    order.add_item("SSD", 1, 150.0);
+    order.add_item("USB cable", 2, 5.0);
+
+    println!("{}", order.total_price());
+    
+    let mut processor = DebitPaymentProcessor::new("2349875");
+    processor.auth_sms(465839);
+    processor.pay(&mut order);
+}
+
+#[macros::example]
+fn interface_segregation_after() {
+    use solid::interface_segregation_after::*;
+
+    let mut order = Order::new();
+
+    order.add_item("Keyboard", 1, 50.0);
+    order.add_item("SSD", 1, 150.0);
+    order.add_item("USB cable", 2, 5.0);
+
+    println!("{}", order.total_price());
+    
+    let authorizer = RefCell::new(SMSAuthorizer::new());
+
+    let processor = PaypalPaymentProcessor::new("hi@arjancodes.com", &authorizer);
+    authorizer.borrow_mut().verify_code(465839);
     processor.pay(&mut order);
 }
