@@ -12,6 +12,8 @@ fn main() {
     interface_segregation_before();
 
     interface_segregation_after();
+
+    dependency_inversion();
 }
 
 #[macros::example]
@@ -112,5 +114,26 @@ fn interface_segregation_after() {
 
     let processor = PaypalPaymentProcessor::new("hi@arjancodes.com", &authorizer);
     authorizer.borrow_mut().verify_code(465839);
+    processor.pay(&mut order);
+}
+
+#[macros::example]
+fn dependency_inversion() {
+    use solid::dependency_inversion_after::*;
+
+    let mut order = Order::new();
+
+    order.add_item("Keyboard", 1, 50.0);
+    order.add_item("SSD", 1, 150.0);
+    order.add_item("USB cable", 2, 5.0);
+
+    println!("{}", order.total_price());
+    
+    // let authorizer = RefCell::new(SMSAuthorizer::new());
+    let authorizer = RefCell::new(AuthorizerRobot::new());
+
+    let processor = PaypalPaymentProcessor::new("hi@arjancodes.com", &authorizer);
+    // authorizer.borrow_mut().verify_code(465839);
+    authorizer.borrow_mut().not_a_robot();
     processor.pay(&mut order);
 }
